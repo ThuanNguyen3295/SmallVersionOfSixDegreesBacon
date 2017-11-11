@@ -1,7 +1,8 @@
 function Graph(){
   this.nodes = []
   this.graph = {};
-
+  this.end = null;
+  this.start = null;
 }
 Graph.prototype.addNode = function(n){
     //add the node in the array
@@ -14,4 +15,11 @@ Graph.prototype.addNode = function(n){
 Graph.prototype.getNode = function(actor){
     var n = this.graph[actor];
     return n;
+}
+Graph.prototype.setStart= function(actor){
+  this.start= this.graph[actor]; // assuming the actor exists
+  // may cause errors if null or undefined;
+}
+Graph.prototype.setEnd = function(actor){
+    this.end = this.graph[actor];
 }

@@ -1,15 +1,10 @@
 
-
 // function preload(){
 //     //data = loadJSON('bacon.json');
 // }
 var graph;
-
-
-
 function setup(){
     noCanvas();
-    console.log(data);
     graph = new Graph();
 
     var movies = data.movies;
@@ -33,20 +28,10 @@ function setup(){
           }
 
     }
+    graph.setStart("Mickey Rourke");
+    graph.setEnd("Kevin Bacon");
     console.log(graph);
 }
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
