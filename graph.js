@@ -12,6 +12,14 @@ Graph.prototype.addNode = function(n){
     this.graph[title] = n;
 }
 
+Graph.prototype.reset = function(){
+   for(var i = 0; i < this.nodes.length; i++){
+        this.nodes[i].visited = false;
+        this.nodes[i].parent = false;
+   }
+}
+
+
 Graph.prototype.getNode = function(actor){
     var n = this.graph[actor];
     return n;
