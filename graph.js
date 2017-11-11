@@ -19,7 +19,9 @@ Graph.prototype.getNode = function(actor){
 Graph.prototype.setStart= function(actor){
   this.start= this.graph[actor]; // assuming the actor exists
   // may cause errors if null or undefined;
+  return this.start;
 }
 Graph.prototype.setEnd = function(actor){
     this.end = this.graph[actor];
+    return this.end;
 }

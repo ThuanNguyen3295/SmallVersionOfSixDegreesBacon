@@ -6,7 +6,7 @@ var graph;
 function setup(){
     noCanvas();
     graph = new Graph();
-
+    var drop = createSelect();
     var movies = data.movies;
     for(var i = 0; i < movies.length; i++){
           var movie = movies[i].title;
@@ -28,10 +28,51 @@ function setup(){
           }
 
     }
-    graph.setStart("Mickey Rourke");
-    graph.setEnd("Kevin Bacon");
+     var start = graph.setStart("Rachel McAdams");
+    //var start = graph.setStart("Kevin Bacon"); // for debug
+    var end = graph.setEnd("Kevin Bacon");
     console.log(graph);
+
+    var queue = [];
+    //var start
+    start.visited = true;
+    queue.push(start);
+    while(queue.length  >0){
+
+      var current = queue.shift();
+        //console.log(current.value);
+      if (current == end){  // if found, break form the loop
+        //console.log("Found " + current.value);
+        break;
+      }
+      var edges = current.edges;
+      for(var i =0; i < edges.length; i++){
+          var neighbor = edges[i];
+              if (!neighbor.visited){
+                    neighbor.visited = true;
+                    neighbor.parent = current;
+                    queue.push(neighbor);
+              }
+      }
+    }
+
+    var path = [];
+    path.push(end);
+    var next = end.parent;
+    while(next != null) {
+        path.push(next);
+        next = next.parent;
+    }
+    var txt = '';
+    for (var i = path.length - 1; i >=0; i--){
+        var n = path[i];
+        txt += n.value + ' --> ';
+    }
+    console.log(txt);
+
 }
+
+
 
 
 
