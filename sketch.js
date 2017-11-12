@@ -2,59 +2,61 @@
 // function preload(){
 //     //data = loadJSON('bacon.json');
 // }
-var graph;
-var drop;
+var graph;  // the graph object that contains all the movies and actors
+var drop; // the dropdown menu
 function setup(){
     noCanvas();
     graph = new Graph();
     drop = createSelect();
-    drop.changed(bfs);
-    var movies = data.movies;
-    for(var i = 0; i < movies.length; i++){
+    drop.changed(bfs); // when the dropdown menu is changed, call the breadth
+    // first search
+    var movies = data.movies; // get the data from json file
+    for(var i = 0; i < movies.length; i++){ // for each movie
           var movie = movies[i].title;
           var cast = movies[i].cast;
           var movieNode = new Node(movie);
-          graph.addNode(movieNode);
+          graph.addNode(movieNode); // add all the movies in the graph
 
           for(var j =0 ; j < cast.length; j++) {
              var actor = cast[j];
 
              //var actorNode = graph.getNode(actor);
              var actorNode = graph.getNode(actor);
-             if(actorNode == undefined){
-                actorNode = new Node(actor);
-                drop.option(actor);
+             if(actorNode == undefined){  // if the actor node is not in the graph
+                actorNode = new Node(actor); // then create it
+                drop.option(actor); // if a new actor, also add it in the dropdown
              }
 
-             graph.addNode(actorNode);
-             movieNode.addEdge(actorNode);
+             graph.addNode(actorNode); // add the node
+             movieNode.addEdge(actorNode); // for the movie, add the actor as an edge
           }
-
     }
 }
+/* This function traverses through the graph using breadth first search
+ * and return the sequence of actors
+ */
 function bfs(){
-  graph.reset();
-  var start = graph.setStart(drop.value());
+  graph.reset();  // reset the graph before each search
+  var start = graph.setStart(drop.value()); // get the actor from the dropdown
  //var start = graph.setStart("Kevin Bacon"); // for debug
  var end = graph.setEnd("Kevin Bacon");
- console.log(graph);
+ //console.log(graph);
 
- var queue = [];
+ var queue = [];  // acts as a queue
  //var start
  start.visited = true;
  queue.push(start);
- while(queue.length  >0){
-
-   var current = queue.shift();
+ while(queue.length  >0){ // first in first out order
+   var current = queue.shift(); // get the top one of the queue, "pop" it off the queue
      //console.log(current.value);
    if (current == end){  // if found, break form the loop
      //console.log("Found " + current.value);
      break;
    }
-   var edges = current.edges;
+   var edges = current.edges; // psuh all of the edges on the queue
    for(var i =0; i < edges.length; i++){
        var neighbor = edges[i];
-           if (!neighbor.visited){
+           if (!neighbor.visited){ // check if the node is visited
                  neighbor.visited = true;
                  neighbor.parent = current;
                  queue.push(neighbor);
@@ -67,10 +69,10 @@ function bfs(){
  var next = end.parent;
  while(next != null) {
      path.push(next);
-     next = next.parent;
+     next = next.parent; // push all the nodes in the path from end to start
  }
  var txt = '';
- for (var i = path.length - 1; i >=0; i--){
+ for (var i = path.length - 1; i >=0; i--){ // output the result
      var n = path[i];
      if (n.value != undefined) {
           txt += n.value ;
