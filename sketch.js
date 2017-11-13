@@ -6,7 +6,7 @@
 var graph;  // the graph object that contains all the movies and actors
 var drop; // the dropdown menu
 function setup(){
-    createCanvas(1400, 1000);
+    createCanvas(1800, 1000);
     graph = new Graph();
     drop = createSelect();
     drop.changed(bfs); // when the dropdown menu is changed, call the breadth
@@ -35,7 +35,9 @@ function setup(){
 }
 function draw(){
   background(51);
+  graph.simulate();
   graph.show();
+
 }
 
 
@@ -85,10 +87,11 @@ function bfs(){
      if (n.value != undefined) {
           txt += n.value ;
      if (i !=0){
+       path[i].hightlight();
        txt += ' --> ';
      }}
  }
- console.log(txt);
+ //console.log(txt);
     createP(txt);
 }
 
