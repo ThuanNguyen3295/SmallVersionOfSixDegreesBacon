@@ -5,6 +5,3 @@ six or fewer acquaintance links apart. It finds the shortest path between an arb
 <img src='https://github.com/ThuanNguyen3295/SmallVersionOfSixDegreesBacon/blob/master/SixDegreeofBacon.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
-## License
-
-    Copyright [2017] [Thuan Nguyen]
