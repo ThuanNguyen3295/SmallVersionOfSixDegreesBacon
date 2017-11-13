@@ -1,11 +1,12 @@
-
+// var data;
 // function preload(){
-//     //data = loadJSON('bacon.json');
+//     data = loadJSON('bacon.json');
 // }
+
 var graph;  // the graph object that contains all the movies and actors
 var drop; // the dropdown menu
 function setup(){
-    noCanvas();
+    createCanvas(1400, 1000);
     graph = new Graph();
     drop = createSelect();
     drop.changed(bfs); // when the dropdown menu is changed, call the breadth
@@ -32,6 +33,13 @@ function setup(){
           }
     }
 }
+function draw(){
+  background(51);
+  graph.show();
+}
+
+
+
 /* This function traverses through the graph using breadth first search
  * and return the sequence of actors
  */

@@ -38,3 +38,13 @@ Graph.prototype.setEnd = function(actor){
     this.end = this.graph[actor];
     return this.end;
 }
+// Draw everything
+Graph.prototype.show = function() {
+  for (var i = 0; i < this.nodes.length; i++) {
+    this.nodes[i].showEdges();
+  }
+  for (var i = 0; i < this.nodes.length; i++) {
+    this.nodes[i].show();
+    this.nodes[i].hightlight();
+  }
+}
